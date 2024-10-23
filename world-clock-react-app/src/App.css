@@ -17,4 +17,5 @@
   padding: 20px;
   border-radius: 20px;
   box-shadow: 0 0 10px #666666;
+  min-height: 300px;
 }

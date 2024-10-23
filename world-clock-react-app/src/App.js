@@ -77,11 +77,19 @@ function App() {
   };
 
   if (loading) {
-    return <div className="App">Loading...</div>;
+    return <div className="App">
+      <div className="content-container">
+        <p>Loading...</p>
+      </div>
+    </div>;
   }
 
   if (error) {
-    return <div className="App">Error: {error}</div>;
+    return <div className="App">
+      <div className="content-container">
+        <p>Error: {error}</p>
+      </div>
+    </div>;
   }
 
   return (
