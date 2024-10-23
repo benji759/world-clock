@@ -7,6 +7,7 @@ function App() {
   const [timezoneData, setTimezoneData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentTime, setCurrentTime] = useState(null);
 
   useEffect(() => {
     const fetchTimezones = async () => {
@@ -36,6 +37,7 @@ function App() {
         }
         const data = await response.json();
         setTimezoneData(data);
+        setCurrentTime(new Date(data.datetime));
       } catch (err) {
         setError(err.message);
       } finally {
@@ -45,6 +47,16 @@ function App() {
 
     fetchTimezoneData();
   }, [selectedTimezone]);
+
+  useEffect(() => {
+    if (currentTime) {
+      const intervalId = setInterval(() => {
+        setCurrentTime((prevTime) => new Date(prevTime.getTime() + 1000));
+      }, 1000);
+
+      return () => clearInterval(intervalId);
+    }
+  }, [currentTime]);
 
   const handleTimezoneChange = (event) => {
     setSelectedTimezone(event.target.value);
@@ -85,7 +97,7 @@ function App() {
       {timezoneData && (
         <div>
           <p>Timezone: {timezoneData.timezone}</p>
-          <p>Time and date: {formatDatetime(timezoneData.datetime)}</p>
+          <p>Time and date: {formatDatetime(currentTime)}</p>
           <p>UTC offset: {timezoneData.utc_offset}</p>
         </div>
       )}
