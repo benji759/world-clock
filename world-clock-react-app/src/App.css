@@ -19,3 +19,21 @@
   box-shadow: 0 0 10px #666666;
   min-height: 300px;
 }
+
+h1 {
+  margin-top: 0;
+  text-align: center;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+select {
+  margin-bottom: 1rem;
+}
+
+label {
+  font-weight: bold;
+}
