@@ -86,21 +86,23 @@ function App() {
 
   return (
     <div className="App">
-      <select value={selectedTimezone} onChange={handleTimezoneChange}>
-        {timezones.map((timezone) => (
-          <option key={timezone} value={timezone}>
-            {timezone}
-          </option>
-        ))}
-      </select>
+      <div className="content-container">
+        <select value={selectedTimezone} onChange={handleTimezoneChange}>
+          {timezones.map((timezone) => (
+            <option key={timezone} value={timezone}>
+              {timezone}
+            </option>
+          ))}
+        </select>
 
-      {timezoneData && (
-        <div>
-          <p>Timezone: {timezoneData.timezone}</p>
-          <p>Time and date: {formatDatetime(currentTime)}</p>
-          <p>UTC offset: {timezoneData.utc_offset}</p>
-        </div>
-      )}
+        {timezoneData && (
+          <div>
+            <p>Timezone: {timezoneData.timezone}</p>
+            <p>Time and date: {formatDatetime(currentTime)}</p>
+            <p>UTC offset: {timezoneData.utc_offset}</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
