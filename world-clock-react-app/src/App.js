@@ -50,6 +50,20 @@ function App() {
     setSelectedTimezone(event.target.value);
   };
 
+  const formatDatetime = (datetimeString) => {
+    const date = new Date(datetimeString);
+    return date.toLocaleString('en-GB', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      timeZoneName: 'short'
+    });
+  };
+
   if (loading) {
     return <div className="App">Loading...</div>;
   }
@@ -71,8 +85,8 @@ function App() {
       {timezoneData && (
         <div>
           <p>Timezone: {timezoneData.timezone}</p>
-          <p>Datetime: {timezoneData.datetime}</p>
-          <p>UTC Offset: {timezoneData.utc_offset}</p>
+          <p>Time and date: {formatDatetime(timezoneData.datetime)}</p>
+          <p>UTC offset: {timezoneData.utc_offset}</p>
         </div>
       )}
     </div>
