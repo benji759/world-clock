@@ -13,7 +13,7 @@ function App() {
   useEffect(() => {
     const fetchTimezones = async () => {
       try {
-        const response = await fetch('http://worldtimeapi.org/api/timezone');
+        const response = await fetch('https://worldtimeapi.org/api/timezone');
         if (!response.ok) {
           throw new Error('Failed to fetch timezones');
         }
@@ -32,7 +32,7 @@ function App() {
     const fetchTimezoneData = async () => {
       setLoading(true);
       try {
-        const response = await fetch(`http://worldtimeapi.org/api/timezone/${selectedTimezone}`);
+        const response = await fetch(`https://worldtimeapi.org/api/timezone/${selectedTimezone}`);
         if (!response.ok) {
           throw new Error('Failed to fetch timezone data');
         }
