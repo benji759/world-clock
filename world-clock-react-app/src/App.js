@@ -96,7 +96,7 @@ function App() {
     <div className="App">
       <div className="content-container">
         <h1>World Clock</h1>
-        <label for="timezone-select">Select time zone:</label>
+        <label htmlFor="timezone-select">Select time zone:</label>
         <select id="timezone-select" value={selectedTimezone} onChange={handleTimezoneChange}>
           {timezones.map((timezone) => (
             <option key={timezone} value={timezone}>
@@ -107,11 +107,11 @@ function App() {
 
         {timezoneData && (
           <div>
-            <label for="details-timezone">Timezone:</label>
+            <label htmlFor="details-timezone">Timezone:</label>
             <p id="details-timezone">{timezoneData.timezone}</p>
-            <label for="details-time-date">Time and date:</label>
+            <label htmlFor="details-time-date">Time and date:</label>
             <p id="details-time-date">{formatDatetime(currentTime)}</p>
-            <label for="details-offset">UTC offset:</label>
+            <label htmlFor="details-offset">UTC offset:</label>
             <p id="details-offset">{timezoneData.utc_offset}</p>
           </div>
         )}
