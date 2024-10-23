@@ -1,5 +1,6 @@
 import './App.css';
 import { useState, useEffect } from 'react';
+import { DateTime } from 'luxon';
 
 function App() {
   const [timezones, setTimezones] = useState([]);
@@ -37,7 +38,8 @@ function App() {
         }
         const data = await response.json();
         setTimezoneData(data);
-        setCurrentTime(new Date(data.datetime));
+        const timezoneAwareDatetime = DateTime.fromISO(data.datetime).setZone(data.timezone);
+        setCurrentTime(timezoneAwareDatetime);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -51,7 +53,7 @@ function App() {
   useEffect(() => {
     if (currentTime) {
       const intervalId = setInterval(() => {
-        setCurrentTime((prevTime) => new Date(prevTime.getTime() + 1000));
+        setCurrentTime((prevTime) => prevTime.plus({ seconds: 1 }));
       }, 1000);
 
       return () => clearInterval(intervalId);
@@ -62,18 +64,8 @@ function App() {
     setSelectedTimezone(event.target.value);
   };
 
-  const formatDatetime = (datetimeString) => {
-    const date = new Date(datetimeString);
-    return date.toLocaleString('en-GB', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-      timeZoneName: 'short'
-    });
+  const formatDatetime = (datetime) => {
+    return datetime.toLocaleString(DateTime.DATETIME_MED_WITH_SECONDS);
   };
 
   if (loading) {
@@ -109,7 +101,7 @@ function App() {
           <div>
             <label htmlFor="details-timezone">Timezone:</label>
             <p id="details-timezone">{timezoneData.timezone}</p>
-            <label htmlFor="details-time-date">Time and date:</label>
+            <label htmlFor="details-time-date">Date and time:</label>
             <p id="details-time-date">{formatDatetime(currentTime)}</p>
             <label htmlFor="details-offset">UTC offset:</label>
             <p id="details-offset">{timezoneData.utc_offset}</p>
